@@ -1,0 +1,210 @@
+" 常规设置
+set clipboard=unnamed
+set ignorecase
+let mapleader= "\<space>"
+
+" 载入自定义配置
+nmap <Leader>so :so ~/.vsvimrc<CR>
+
+" 分屏和关闭的键映射
+nmap <Leader>x1 :vsplit<CR>
+nmap <Leader>x0 :q<CR>
+
+" 模拟Surround绑定
+nnoremap s) ciw(<C-r>")<Esc>
+nnoremap s] ciw[<C-r>"]<Esc>
+nnoremap s} ciw{<C-r>"}<Esc>
+nnoremap s> ciw<lt><C-r>"><Esc>
+nnoremap s" ciw"<C-r>""<Esc>
+nnoremap s' ciw'<C-r>"'<Esc>
+nnoremap sw) ciW(<C-r>")<Esc>
+nnoremap sw] ciW[<C-r>"]<Esc>
+nnoremap sw} ciW{<C-r>"}<Esc>
+nnoremap sw> ciW<lt><C-r>"><Esc>
+nnoremap sw" ciW"<C-r>""<Esc>
+nnoremap sw' ciW'<C-r>"'<Esc>
+
+" Surround删除绑定
+nnoremap ds) vi(dvhp
+nnoremap ds] vi[dvhp
+nnoremap ds} vi{dvhp
+nnoremap ds> vi<dvhp
+nnoremap ds" vi"dvhp
+nnoremap ds' vi'dvhp
+
+" Surround更改绑定
+nnoremap cs"' vi"oh<Esc>msvi"l<Esc>cl'<Esc>`scl'<Esc>
+nnoremap cs'" vi'oh<Esc>msvi'l<Esc>cl"<Esc>`scl"<Esc>
+
+" Surround可视选定文本
+vnoremap S" c"<C-r>""<Esc>
+vnoremap S' c"<C-r>"'<Esc>
+vnoremap S) c(<C-r>")<Esc>
+vnoremap S] c[<C-r>"]<Esc>
+vnoremap S} c{<C-r>"}<Esc>
+vnoremap S> c<lt><C-r>"><Esc>
+vnoremap S* c/*<C-r>"*/<Esc>
+vnoremap St c<lt>div><CR><C-r>"<Esc>`<lt>lcw
+
+" 模板
+map <LEADER>. <ESC> /<++><CR>:nohlsearch<CR>c4l
+
+" 添加 var x =
+map <LEADER>vx ^ivar x = <ESC> bbciw
+
+" 转换为某物 开始 --------------------------------------
+
+" 转换为字符串
+"nmap <Leader>2s viwxistring<Esc>
+
+"nmap <Leader>2b viwxibool<Esc>
+
+" 转换为浮点数
+"nmap <Leader>2f viwxifloat<Esc>
+
+" 转换为十进制数
+"nmap <Leader>2d viwxidecimal<Esc>
+
+" 转换为变量
+"nmap <Leader>2v viwxivar<Esc>
+
+" 切换为 true
+"nmap <Leader>tt viwxitrue<Esc>
+
+" 切换为 false
+"nmap <Leader>tf viwxifalse<Esc>
+
+" 转为 MVC URL
+nmap <Leader>2u vi'xi@Url.Content("<C-r>"")
+
+" 转换为某物 结束 --------------------------------------
+
+" editor.action.rename
+" 使用 Refactor 功能
+nmap <Leader>rr :vsc Refactor.Rename<CR>
+
+" 大范围搜索
+" workbench.action.findInFiles
+nmap <Leader>ff :vsc Edit.FindinFiles<CR>
+
+" 目前文件搜索
+" actions.find
+nmap <Leader>ss :vsc Edit.Find<CR>
+" 选择的时候区域找
+vmap <Leader>ss :vsc Edit.Find<CR>
+
+
+" 可用的参考命令 ----------------------------------------------
+" 复制相对路径
+" workbench.action.files.copyPathOfActiveFile
+" copyRelativeFilePath
+" workbench.action.togglePanel
+" like vscode command
+" workbench.action.showCommands
+" 开窗到右侧 ctrl + w w 切换窗
+":vsplit
+" workbench.action.splitEditorRight
+" ctrl + f6
+" 切回 editor
+" 可用的参考命令 ----------------------------------------------
+
+nmap <Leader>xm :vsc View.CommandWindow<CR>
+
+" 扩展选取
+" editor.action.smartSelect.expand
+nmap <Leader>xx :vsc Edit.ExpandSelection<CR>
+vmap <Leader>xx :vsc Edit.ExpandSelection<CR>
+
+" 反扩展选取
+" editor.action.smartSelect.shrink
+nmap <Leader>zz :vsc Edit.ContractSelection<CR>
+vmap <Leader>zz :vsc Edit.ContractSelection<CR>
+
+" 最近打开的文件
+" workbench.action.openRecent
+nmap <Leader>rf :vsc Edit.GoToRecentFile<CR>
+
+" 切换到方案总管
+nmap <Leader>e :vsc View.SolutionExplorer<CR>
+" 在方案总管开启文件夹
+" nmap <Leader>of :vsc ProjectandSolutionContextMenus.Project.OpenFolderinFileExplorer<CR>
+
+" gh
+map <Leader>gh :vsc Edit.QuickInfo<CR>
+" gb 设置相同字选择功能
+map <Leader>gb :vsc Edit.InsertNextMatchingCaret<CR>
+
+map <LEADER>gp ^ivar x = new YourObject(); var t = x.GetType(); foreach (var prop in t.GetProperties()) Console.WriteLine( $"x.{prop.Name} = " ); <ESC>
+
+"Json To Chsarp
+map <LEADER>c2j :vsc Edit.PasteJSONAsClasses<CR>
+
+"Add New Class
+map <Leader>nc :vsc Project.AddClass<CR>
+
+"SurroundWith
+map <Leader>sr :vsc Edit.SurroundWith<CR>
+
+"ListMembers
+map <Leader>lm :vsc ListMembers<CR>
+
+"to something begin --------------------------------------
+
+"to string
+"nmap <Leader>2s viwxistring<Esc>
+
+"to string use extension
+nmap <Leader>2s viw:vsc Tools.ToString<CR>
+
+"to int use extension
+nmap <Leader>2i viw:vsc Tools.ToInt<CR>
+
+"to bool
+"nmap <Leader>2b viwxibool<Esc>
+
+"to bool use extension
+nmap <Leader>2b viw:vsc Tools.ToBool<CR>
+
+"to float
+"nmap <Leader>2f viwxifloat<Esc>
+
+"to decimal
+"nmap <Leader>2d viwxidecimal<Esc>
+
+"to var
+"nmap <Leader>2v viwxivar<Esc>
+
+"to var use extension
+nmap <Leader>2v viw:vsc Tools.ToVar<CR>
+
+"to double use extension
+nmap <Leader>2f viw:vsc Tools.ToDouble<CR>
+
+"toogle true
+"nmap <Leader>tt viwxitrue<Esc>
+
+"toogle false
+"nmap <Leader>tf viwxifalse<Esc>
+
+"toogle use extension
+nmap <Leader>tt viw:vsc Tools.Toggle<CR>
+
+"to mvc url
+nmap <Leader>2u vi'xi@Url.Content("<C-r>"")
+
+"to something end --------------------------------------
+
+"go to file 必须先选中路径
+map <Leader>gf :vsc Tools.GoToFile<CR>
+
+"select current method
+map <Leader>vim :vsc Tools.SelectCurrentMethod<CR>
+
+"Move To Method Begin
+map <Leader>gmb :vsc Tools.MoveToMethodBegin<CR>
+
+"Move To Method End
+map <Leader>gme :vsc Tools.MoveToMethodEnd<CR>
+
+"postfix completion
+map <LEADER>. :vsc Tools.PostFixVar<CR>
